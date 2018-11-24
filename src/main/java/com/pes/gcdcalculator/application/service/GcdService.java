@@ -44,6 +44,9 @@ public class GcdService {
                     abs(calculation.getSecond())
             );
             calculation.setResult(result);
+            if (calculation.getFirst() == 11){
+                throw new RuntimeException("Some exception!");
+            }
         } catch (Exception ex) {
             LOGGER.error(ex.toString());
             calculation.setError(ex.toString());

@@ -25,7 +25,7 @@ public class EventsRerunner {
         this.gcdService = gcdService;
     }
 
-    @Scheduled(initialDelay = 1000)
+    @Scheduled(initialDelay = 1000, fixedDelay = Long.MAX_VALUE)
     public void rerunEvents() {
         List<Calculation> calculations = storageService.findCalculations();
         LOGGER.info("Events to rerun: " + calculations.size());
