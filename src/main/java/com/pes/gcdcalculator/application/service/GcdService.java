@@ -12,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
-import static java.lang.Math.abs;
-
 
 @Service
 public class GcdService {
@@ -39,14 +37,8 @@ public class GcdService {
     @Transactional
     public void calculateGcd(Calculation calculation) {
         try {
-            long result = calculationService.calculate(
-                    abs(calculation.getFirst()),
-                    abs(calculation.getSecond())
-            );
+            long result = calculationService.calculate(calculation.getFirst(), calculation.getSecond());
             calculation.setResult(result);
-            if (calculation.getFirst() == 11){
-                throw new RuntimeException("Some exception!");
-            }
         } catch (Exception ex) {
             LOGGER.error(ex.toString());
             calculation.setError(ex.toString());
