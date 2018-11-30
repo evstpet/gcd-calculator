@@ -15,14 +15,14 @@ import org.springframework.stereotype.Component;
 import static org.springframework.amqp.core.ExchangeTypes.TOPIC;
 
 @Component
-public class Receiver {
+public class EventListener {
 
     private GcdService gcdService;
 
     private GcdCalculationStorageService storageService;
 
     @Autowired
-    public Receiver(
+    public EventListener(
             GcdService gcdService,
             GcdCalculationStorageService storageService
     ) {
@@ -33,8 +33,8 @@ public class Receiver {
     @RabbitListener(bindings = {
             @QueueBinding(
                     value = @Queue("${spring.rabbitmq.template.queue}"),
-                    exchange = @Exchange(value = "gcd.client.exchange", type = TOPIC),
-                    key = {"gcd.client.routing.key"}
+                    exchange = @Exchange(value = "${client.exchange}", type = TOPIC),
+                    key = {"${calculator.routing.key}"}
             )
     })
     public void onMessage(Message<CalculationRequestEvent> message) {

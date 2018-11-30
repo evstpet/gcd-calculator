@@ -4,12 +4,19 @@ import com.pes.gcdcalculator.application.event.dto.CalculationResultEvent;
 import com.pes.gcdcalculator.domain.vo.Calculation;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RabbitEventSender implements EventSender {
 
     private RabbitTemplate rabbitTemplate;
+
+    @Value("${spring.rabbitmq.template.exchange}")
+    private String outcomeExchange;
+
+    @Value("${client.routing.key}")
+    private String routingKey;
 
     @Autowired
     public RabbitEventSender(RabbitTemplate rabbitTemplate) {
