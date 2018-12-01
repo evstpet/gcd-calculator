@@ -9,6 +9,8 @@ import java.io.Serializable;
 @Builder
 public class CalculationResultEvent implements Serializable {
     private Long id;
+    private Long first;
+    private Long second;
     private Long result;
     private String error;
 }

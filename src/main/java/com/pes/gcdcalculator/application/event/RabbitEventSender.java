@@ -27,6 +27,8 @@ public class RabbitEventSender implements EventSender {
     public void sendEvent(Calculation calculation) {
         CalculationResultEvent result = CalculationResultEvent.builder()
                 .id(calculation.getId())
+                .first(calculation.getFirst())
+                .second(calculation.getSecond())
                 .result(calculation.getResult())
                 .error(calculation.getError())
                 .build();
