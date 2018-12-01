@@ -2,7 +2,6 @@ package com.pes.gcdcalculator.application.event;
 
 import com.pes.gcdcalculator.application.event.dto.CalculationRequestEvent;
 import com.pes.gcdcalculator.application.service.GcdService;
-import com.pes.gcdcalculator.domain.storage.GcdCalculationStorageService;
 import com.pes.gcdcalculator.domain.vo.Calculation;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
@@ -19,15 +18,9 @@ public class EventListener {
 
     private GcdService gcdService;
 
-    private GcdCalculationStorageService storageService;
-
     @Autowired
-    public EventListener(
-            GcdService gcdService,
-            GcdCalculationStorageService storageService
-    ) {
+    public EventListener(GcdService gcdService) {
         this.gcdService = gcdService;
-        this.storageService = storageService;
     }
 
     @RabbitListener(bindings = {
@@ -45,7 +38,6 @@ public class EventListener {
                 .second(request.getSecond())
                 .build();
 
-        storageService.save(calculation);
         gcdService.calculateGcd(calculation);
     }
 }

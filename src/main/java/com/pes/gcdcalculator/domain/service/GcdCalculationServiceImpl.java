@@ -1,18 +1,17 @@
 package com.pes.gcdcalculator.domain.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import static java.lang.Math.abs;
 
 @Service
+@Slf4j
 public class GcdCalculationServiceImpl implements GcdCalculationService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(GcdCalculationService.class);
 
     @Override
     public long calculate(long first, long second) {
-        LOGGER.info("first = " + first + ", second = " + second);
+        log.info("first = " + first + ", second = " + second);
 
         first = abs(first);
         second = abs(second);
@@ -26,7 +25,7 @@ public class GcdCalculationServiceImpl implements GcdCalculationService {
         }
         long result = first + second;
 
-        LOGGER.info("result = " + result);
+        log.info("result = " + result);
         return result;
     }
 }

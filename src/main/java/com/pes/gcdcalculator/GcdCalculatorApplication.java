@@ -2,7 +2,6 @@ package com.pes.gcdcalculator;
 
 import com.pes.gcdcalculator.application.event.dto.CalculationRequestEvent;
 import com.pes.gcdcalculator.application.event.dto.CalculationResultEvent;
-import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.support.converter.DefaultClassMapper;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
@@ -39,10 +38,5 @@ public class GcdCalculatorApplication {
 		classMapper.setIdClassMapping(idClassMapping);
 		classMapper.setTrustedPackages("*");
 		return classMapper;
-	}
-
-	@Bean
-	public TopicExchange calculatorExchange() {
-		return new TopicExchange("gcd.client.exchange");
 	}
 }
