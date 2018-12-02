@@ -1,13 +1,14 @@
-package com.pes.gcdcalculator;
+package com.pes.gcdcalculator.domain.service;
 
-import com.pes.gcdcalculator.domain.service.GcdCalculationService;
-import com.pes.gcdcalculator.domain.service.GcdCalculationServiceImpl;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.testng.Assert.assertEquals;
 
-public class GcdCalculationServiceTest {
+@SpringBootTest(classes = {GcdCalculationService.class})
+public class CalculationServiceTests extends AbstractTestNGSpringContextTests {
 
     private GcdCalculationService gcdCalculationService = new GcdCalculationServiceImpl();
 
@@ -15,11 +16,11 @@ public class GcdCalculationServiceTest {
     public void testCalculate(long first, long second, long expectedResult) {
         long result = gcdCalculationService.calculate(first, second);
 
-        assertThat(result).isEqualTo(expectedResult);
+        assertEquals(result, expectedResult);
     }
 
     @DataProvider(name = "testData")
-    public static Object[][] primeNumbers() {
+    public static Object[][] testData() {
         return new Object[][]{
                 {11, 33, 11},
                 {-11, 33, 11},
